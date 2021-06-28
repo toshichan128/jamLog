@@ -1,0 +1,46 @@
+<p>店舗名で検索</p>
+<%= form_tag(live_house_search_path,:method => 'get') do %>
+  <%= text_field_tag :search %>
+  <%= submit_tag 'Search', :name => nil %>
+<% end %>
+
+<section class="section mt-6">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-5">
+
+
+<ul><% @live_houses.each do |live_house| %>
+  <div class="card mb-6">
+    <header class="card-header">
+      <p class="card-header-title">
+        <%= live_house.name %>
+      </p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        <div class="content average-score">
+          <div class="star-rating mb-2">
+            <div class="star-rating-front" style="width: <%= live_house.review_score_percentage %>%">★★★★★</div>
+            <div class="star-rating-back">★★★★★</div>
+          </div>
+          <div class="average-score-display ml-3 pt-2">
+            <%= live_house.avg_score %>点 <%= live_house.reviews.count %>（件のレビュー）
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="card-footer">
+      <%= link_to live_house_reviews_path(live_house), class: "button card-footer-item" do %>
+        レビューを見る
+      <% end %>
+      <%= link_to live_house_path(live_house), class: "button card-footer-item" do %>
+        レビューを書く
+      <% end %>
+    </footer>
+  </div>
+  <% end %>
+</div>
+</div>
+</div>
+</section>
